@@ -1,5 +1,5 @@
 {
-  "name": "@linzhinan/vue-code-link",
+  "name": "tinyjs-code-link",
   "version": "1.0.34",
   "description": "",
   "main": "index.js",
@@ -8,30 +8,25 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "vue",
-    "code link",
+    "Tiny.js",
+    "PIXI.js",
     "link",
+    "code link",
     "vscode",
-    "vue-code-link",
-    "click page",
-    "location",
-    "vue-dev-code-link",
-    "dev",
-    "click",
-    "代码定位",
-    "点击页面定位",
-    "点击",
-    "定位",
-    "页面元素"
+    "code-link",
+    "dev-code-link",
+    "code location"
   ],
   "author": "linzhinan",
   "license": "MIT",
   "dependencies": {
-    "axios": "0.24.0"
+    "@babel/parser": "^7.18.8",
+    "@babel/traverse": "^7.18.8",
+    "@babel/types": "^7.18.8"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chana1024/linzhinan-vue-code-link.git"
+    "url": "https://github.com/yj1438/tinyjs-code-link.git"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^3.3.0",
@@ -40,9 +35,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "commit-msg": "./validate-commit-msg.js"
     }
   }
 }

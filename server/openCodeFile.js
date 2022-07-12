@@ -1,11 +1,12 @@
+const path = require("path");
 const child_process = require("child_process");
 const pathUtil = require("../utils/pathUtil.js");
 const serverConfig = require("./config.js");
 
-function openCodeFileInWebStorm(path) {
-  let filePath = path.split(":")[0];
-  let linePath = path.split(":")[1];
-  filePath = pathUtil.projectBasePath + filePath;
+function openCodeFileInWebStorm(codePath) {
+  let filePath = codePath.split(":")[0];
+  let linePath = codePath.split(":")[1];
+  filePath = path.join(pathUtil.projectBasePath, filePath);
 
   if (os() === "win32") {
     child_process.exec(`webstorm64.exe  --line ${linePath} ${filePath}`, {
@@ -17,8 +18,8 @@ function openCodeFileInWebStorm(path) {
     });
   }
 }
-function openCodeFileInVscode(path) {
-  let filePath = pathUtil.projectBasePath + path;
+function openCodeFileInVscode(codePath) {
+  let filePath = path.join(pathUtil.projectBasePath, codePath);
   child_process.exec(`code -r -g ${filePath}`, {
     env: process.env,
   });
@@ -30,23 +31,21 @@ function os() {
   switch (platform) {
     case "darwin":
       return "MacOSX";
-      break;
     case "linux":
       return "Linux";
-      break;
     case "win32":
       return "Windows";
-      break;
     default:
       return "无法确定操作系统!";
   }
 }
-exports.openCodeFile = function (path) {
+
+module.exports = function (codePath) {
   if (serverConfig.getEditor() === "vscode") {
-    openCodeFileInVscode(path);
+    openCodeFileInVscode(codePath);
   } else if (serverConfig.getEditor() === "webstorm") {
-    openCodeFileInWebStorm(path);
+    openCodeFileInWebStorm(codePath);
   } else {
-    openCodeFileInVscode(path);
+    openCodeFileInVscode(codePath);
   }
 };
